@@ -18,12 +18,13 @@ async function bootstrap() {
     .setDescription('NestJS TypeORM Firebase auth')
     .setVersion('0.0.1')
     .addTag('auth')
+    .addTag('admin')
     .addTag('users')
     // You can add new tags for your controllers here
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api/client', app, document);
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(process.env.PORT || 3000);
 }

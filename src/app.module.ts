@@ -7,8 +7,7 @@ import * as admin from 'firebase-admin'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
-import { AdminModule } from './modules/admin/admin.module';
-
+import { InstallModule } from './modules/install/install.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
@@ -18,9 +17,9 @@ import { AdminModule } from './modules/admin/admin.module';
         credential: admin.credential.applicationDefault()
       })
     }),
-    AdminModule,
     AuthModule,
     UserModule,
+    InstallModule,
   ],
   controllers: [AppController],
   providers: [AppService],

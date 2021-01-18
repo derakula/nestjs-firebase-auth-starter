@@ -1,7 +1,9 @@
 export class ValidateIdTokenResponse {
-    customToken: string;
+    mustVerifyEmaii: boolean;
+    mustCompleteProfile: boolean;
 
-    constructor(customToken: string) {
-        this.customToken = customToken;
+    constructor(mustVerifyEmaii: boolean, mustCompleteProfile: boolean) {
+        this.mustVerifyEmaii = mustVerifyEmaii;
+        this.mustCompleteProfile = mustCompleteProfile;
     }
 }

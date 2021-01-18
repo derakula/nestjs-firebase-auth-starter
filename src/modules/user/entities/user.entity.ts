@@ -2,11 +2,18 @@ import {
   Column, CreateDateColumn, Entity, Index, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('user')
+@Entity('users')
+@Index('idx_uid', ['uid'], { unique: true })
 @Index('idx_user_email', ['email'], { unique: true })
 export class UserEntity {
-  @PrimaryColumn()
-  user_id: string;
+  @PrimaryGeneratedColumn()
+  iduser: number;
+
+  @Column({ collation: 'utf8_bin' })
+  uid: string;
+
+  @Column('tinyint', { default: 0 })
+  user_role: number;
 
   @Column({ length: 255 })
   email: string;
@@ -15,19 +22,16 @@ export class UserEntity {
   email_verified: boolean;
 
   @Column({ length: 255 })
-  name: string;
+  display_name: string;
 
   @Column('text', { nullable: true })
-  picture: string | null;
+  photo_url: string | null;
 
-  @Column({ length: 20, nullable: true  })
+  @Column({ length: 20, nullable: true })
   phone_number: string | null;
 
   @Column({ default: false })
   disabled: boolean;
-
-  @Column({ nullable: true  })
-  last_login_at: Date;
 
   @CreateDateColumn()
   created_at: Date; // ISO Date

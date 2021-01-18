@@ -30,7 +30,7 @@ export class UserController {
     @Body() updateRequest: UpdateUserRequest,
     @Usr() user: UserEntity,
   ): Promise<void> {
-    if (uid !== user.user_id) {
+    if (uid !== user.uid) {
       throw new UnauthorizedException();
     }
     await this.userService.updateUser(uid, updateRequest);

@@ -22,7 +22,7 @@ export class UpdateUserRequest {
 
   @IsOptional()
   @IsUrl()
-  picture?: string;
+  photo_url?: string;
 
   @IsOptional()
   phoneNumber?: string;

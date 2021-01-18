@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ValidateIdTokenRequest, ValidateIdTokenResponse } from './dto';
 import { AuthService } from './auth.service';
+import { CompleteProfileRequest } from './dto/request/complete-profile.request';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -10,16 +11,18 @@ export class AuthController {
     constructor(private readonly authService: AuthService) { }
 
     @Post('validate')
-    @ApiOperation({ summary: 'Validate firebase token and generate custom token' })
+    @HttpCode(200)
+    @ApiOperation({ summary: 'Validate firebase token' })
     async validate(@Body() request: ValidateIdTokenRequest): Promise<ValidateIdTokenResponse> {
         return this.authService.validate(request);
     }
 
     @ApiBearerAuth()
-    @Get('current_user')
+    @Post('complete_profile')
     @UseGuards(AuthGuard('firebase'))
-    currentUser(@Request() req) {
+    completeProfile(@Body() body: CompleteProfileRequest, @Request() req) {
         console.log(req.user)
-        return req.user;
+        console.log(body)
+        return this.authService.completeProfile(req.user.user_id);
     }
 }

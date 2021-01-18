@@ -4,6 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { UserService } from './user.service';
 import { UserEntity } from './entities/user.entity';
 import { UserController } from './user.controller';
+import { UserAdminController } from './user.admin.controller';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { UserController } from './user.controller';
   ],
   providers: [UserService],
   exports: [UserService],
-  controllers: [UserController],
+  controllers: [UserController, UserAdminController],
 })
 export class UserModule {
 }
